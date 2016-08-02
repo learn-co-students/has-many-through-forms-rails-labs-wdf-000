@@ -1,1 +1,33 @@
+<h1><%= @post.title %></h1>
 
+<p><%= @post.content %></p>
+
+<p>Users that have commented on this post</p>
+<ul>
+  <%= @post.users.uniq.each do |user| %>
+    <li>
+      <%= link_to user.username, user_path(user) %> says:
+      <% user.comments.each do |comment| %>
+	<%= comment.content if comment.post_id == @post.id %>
+      <% end %>      
+    </li>
+  <% end %>
+</ul>
+
+<p>Categories</p>
+<ul>
+  <% @post.categories.each do |category| %>
+    <li><%= link_to category.name, category_path(category) %></li>
+  <% end %>
+</ul>
+
+<%= form_for(@comment) do |f| %> 
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+  <%= f.collection_select(:user_id, User.all, :id, :username, options = {:include_blank => true}) %>
+  <%= f.fields_for :user, @comment.build_user do |user_field| %> 
+    <%= user_field.text_field :username %>
+  <% end %>
+  <input type="hidden" value="<%= @post.id %>" name="comment[post_id]">
+  <%= f.submit %>
+<% end %>
