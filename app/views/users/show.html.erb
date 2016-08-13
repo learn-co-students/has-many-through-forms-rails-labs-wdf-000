@@ -1,1 +1,5 @@
+<h1><%= @user.username %>'s Posts</h1>
 
+<% @user.posts.each do |x| %>
+  <%= link_to x.title, post_path(x) %>
+<% end %>
