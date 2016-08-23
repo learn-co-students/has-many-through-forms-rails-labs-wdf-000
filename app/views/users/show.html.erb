@@ -1,1 +1,6 @@
 
+users show page should link to all of the posts the user commented on
+
+<% @user.comments.each do |comment| %>
+  <%=  link_to comment.post.title, post_path(comment.post) %>
+<% end %>
