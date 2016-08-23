@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
+    @comment = Comment.new(post_id: @post.id)
   end
 
   def index
@@ -9,6 +10,8 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post.categories.build
+
   end
 
   def create
@@ -22,3 +25,4 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :content, category_ids:[], categories_attributes: [:name])
   end
 end
+
