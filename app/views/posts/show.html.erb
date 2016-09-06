@@ -1,1 +1,36 @@
+<h1><%=@post.title%></h1>
+<p><%=@post.content%></p>
+<%@post.categories.each do |category|%>
+  <%=category.name%>
+<%end%>
 
+<br>
+
+Comments for this post:
+<%@post.comments.each do |comment|%>
+
+  <%if !comment.user.nil? %>
+  <p><%=comment.user.username%> says: <%=comment.content%></p>
+  <%end%>
+
+<%end%>
+
+Commented by: <br>
+<% @post.unique_users.each do |commentator|%>
+ <%= link_to commentator.username, user_path(commentator) %>
+<% end%></br>
+
+
+<p>
+<%= form_for @post.comments.build do |f| %>
+<p>  <%= f.label "Add comment" %><br>
+  <input type="hidden" value= "<%=@post.id%>" name="comment[post_id]">
+  <%=%>
+  <%= f.text_area :content %></p>
+  <%= f.collection_select :user_id, User.all, :id, :username, {include_blank: "Anon"} %> <br>
+  <%= f.fields_for :user, @post.users.build do |user_fields| %>
+    <%= user_fields.text_field :username %>
+  <% end %></p><br>
+  <%= f.submit %>
+<% end %>
+</p>

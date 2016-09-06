@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
+    @add_comment = @post.comments.build
+    #form_for ([@post, @post.comments.build])
   end
 
   def index
