@@ -1,1 +1,24 @@
+<h1><%= @post.title %></h1>
 
+<h3><%= @post.content %></h3>
+
+<ul>
+  <% @post.categories.each do |category| %>
+    <li><%= category.name %></li>
+  <% end %>
+</ul>
+
+<% @post.comments.each do |comment| %>
+  <p style="margin: 10px auto; border-bottom: 1px solid red;">
+    <%= comment.content %>
+  </p>
+<% end %>
+
+<hr>
+
+<p>Commenters:</p>
+<ul>
+  <% @post.uniq_commenters.each do |commenter| %>
+    <li><%= link_to commenter.username, user_path(commenter) %></li>
+  <% end %>
+</ul>
