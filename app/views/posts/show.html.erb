@@ -1,1 +1,14 @@
+<%= @post.title %><br>
+<%= @post.content %><br>
+<% @post.categories.each do |category| %><br>
+  <%= category.name %>
+<% end %>
+<% @post.comments.each do |comment| %><br>
+  <%= comment.content %>
+<% end %>
 
+<ul>
+  <% @post.unique_commenters.each do |commenter| %>
+    <li><%= link_to commenter.username, user_path(commenter) %></li>
+  <% end %>
+</ul>
