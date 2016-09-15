@@ -17,5 +17,4 @@ class Post < ActiveRecord::Base
     commenters.uniq
   end
 
-
 end
