@@ -1,24 +1,30 @@
-<h1><%= @post.title %></h1>
+<div style="width: 90%; margin: 0 auto;">
+  <h1><%= @post.title %></h1>
 
-<h3><%= @post.content %></h3>
+  <h3><%= @post.content %></h3>
 
-<ul>
-  <% @post.categories.each do |category| %>
-    <li><%= category.name %></li>
+  <%= render 'comment_form', comment: Comment.new %>
+
+  <h4>Categories: </h4>
+  <ul>
+    <% @post.categories.each do |category| %>
+      <li><%= category.name %></li>
+    <% end %>
+  </ul>
+
+  <h4>Comments: </h4>
+  <% @post.comments.each do |comment| %>
+    <p style="margin: 10px auto; border-bottom: 1px solid red;">
+      <%= comment.user.username + " says: " + comment.content %>
+    </p>
   <% end %>
-</ul>
 
-<% @post.comments.each do |comment| %>
-  <p style="margin: 10px auto; border-bottom: 1px solid red;">
-    <%= comment.content %>
-  </p>
-<% end %>
+  <hr>
 
-<hr>
-
-<p>Commenters:</p>
-<ul>
-  <% @post.uniq_commenters.each do |commenter| %>
-    <li><%= link_to commenter.username, user_path(commenter) %></li>
-  <% end %>
-</ul>
+  <h4>Commenters:</h4>
+  <ul>
+    <% @post.uniq_commenters.each do |commenter| %>
+      <li><%= link_to commenter.username, user_path(commenter) %></li>
+    <% end %>
+  </ul>
+</div>
