@@ -20,6 +20,23 @@ We've looked at setting up the associations behind posts with comments, categori
 
 1. Create a form at `posts#new` to create a new post. The form should include check boxes for us to select categories as well as a text field to create a new category. You should do this with a nested form so that our controller stays thin. Also, typing in a Category name that already exists should not create a new category. Instead, if we type in "Cool" and that category already exists, we should select it from the database and associate the existing category with the post we've created.
 
+posts have many categories
+categories have many posts
+
+has many through here
+
+step 1 ^^^
+
+step 2 vvv nested form where doubles and duplicates arent made
+
+posts have many comments
+
+a comment belongs to a user
+
+a text box 
+
+
+
 2. Create a posts show page to display the following:
   1. The title and content of the post.
   2. All of the comments associated with the post.
