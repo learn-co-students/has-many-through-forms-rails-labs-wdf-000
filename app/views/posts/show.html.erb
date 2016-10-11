@@ -25,7 +25,7 @@
   <%= comment.text_field :content %>
   <%= comment.hidden_field :post_id, value: @post.id %>
     <%= comment.collection_select :user_id, User.all, :id, :username, {include_blank: 'Please select'} %>
-    <%=comment.fields_for :user, @comment.build_user do |user| %>
+    <%=comment.fields_for :user, User.new do |user| %>
       <%= user.text_field :username %>
     <% end %>
     <%= comment.submit %>
