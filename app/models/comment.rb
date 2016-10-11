@@ -4,8 +4,4 @@ class Comment < ActiveRecord::Base
 
   accepts_nested_attributes_for :user, reject_if: :all_blank
 
-  def anything_at_all
-
-  end
-
 end
