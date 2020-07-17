@@ -1,1 +1,36 @@
+  <%= @post.title %>
+  <%= @post.content %>
+  <% @post.categories.each do |category| %>
+    <%= category.name %>
+  <%end%>
 
+
+  All the post's comments
+
+  <% @post.comments.each do |comment| %>
+    <%=comment.user.username%> says: <%= comment.content %>
+  <%end%>
+
+  <% @post.users.uniq.each do |user| %>
+    <%= link_to user.username, user_path(user) %>
+  <%end%>
+
+
+
+  <%= form_for(Comment.new) do |f| %>
+    <%= f.label :content %>
+      <%= f.text_field :content %>
+        <%= f.hidden_field :post_id, :value => @post.id %>
+
+    Select a User
+
+  <%= f.collection_select :user_id, User.all, :id, :username, :include_blank => 'name of your blank prompt' %>
+  <br></br>
+  Enter A Username
+  <%= f.fields_for :user, Comment.new.build_user do |user| %>
+    <%= user.text_field :username %>
+  <%end%>
+  <br><br>
+
+    <%= f.submit %>
+  <%end%>

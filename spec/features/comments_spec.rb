@@ -8,7 +8,6 @@ describe 'comments', type: 'feature' do
     @user = User.create(username: 'RealBigFish')
     visit post_path(@post)
   end
-
   it 'creates a comment with an existing user' do
     fill_in('comment_content', with: 'great post!')
     select(@user.username, from: 'comment_user_id')
